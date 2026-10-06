@@ -282,6 +282,7 @@ async function sendForm() {
   console.log('FORMULARIO: SUBMIT RECIBIDO', data);
 
   const isBot = !!data.empresa_web;
+   console.log('CAMPO BOT:', data.empresa_web);
   delete data.empresa_web;
 
   data.consentimiento = 'sí';
