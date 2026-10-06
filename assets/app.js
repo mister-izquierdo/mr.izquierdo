@@ -284,9 +284,10 @@ console.log('EMPRESA WEB REAL:', JSON.stringify(data.empresa_web));
 console.log('NEGOCIO REAL:', JSON.stringify(data.negocio));
 
 const botField = form.querySelector('[name="empresa_web"]');
-const isBot = !!(botField && botField.value.trim());
+const botValue = botField ? botField.value.trim() : '';
 
-console.log('CAMPO BOT REAL:', botField ? JSON.stringify(botField.value) : 'NO EXISTE');
+console.log('CAMPO BOT REAL:', JSON.stringify(botValue));
+console.log('NEGOCIO REAL:', JSON.stringify(data.negocio));
 
 delete data.empresa_web;
 
