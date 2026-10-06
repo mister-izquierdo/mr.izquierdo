@@ -2,7 +2,7 @@
 window.MR_CONFIG = {
   // 1) URL de tu Apps Script desplegado como aplicación web (termina en /exec).
   //    Pega aquí la URL que te da Google al implementar el Code.gs como aplicación web.
-  APPS_SCRIPT_URL: 'https://script.google.com/a/*/macros/s/AKfycbxFo3CVPT8Wd6OZa8hCmsqqgm3oGZX6fRyGzPXF8guF4sg9vILrZ2gPbTWY9-ctccJo/exec',
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwOWSftBA8IIb6_Qr0rFBfFAUpXCc-9JmQsR90Nf7mVGySh8Fwdagd-90IYsOs2aoDU/exec',
 
   // 2) Calendly (se incrusta en la página al terminar el formulario).
   CALENDLY_URL: 'https://calendly.com/info-mr-izquierdo/30min',
