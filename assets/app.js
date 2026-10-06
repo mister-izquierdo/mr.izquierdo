@@ -264,7 +264,8 @@
       if (!validateStep(i)) { if (i !== stepIdx) showStep(i, false); return; }
     }
     const data = Object.fromEntries(new FormData(form).entries());
-    const isBot = !!data.empresa_web;                     // campo trampa: un humano no lo ve
+    const isBot = !!data.empresa_web; 
+    console.log('FORMULARIO: SUBMIT RECIBIDO', data);// campo trampa: un humano no lo ve
     delete data.empresa_web;
     data.consentimiento = 'sí';
     data.newsletter = form.elements.newsletter.checked ? 'sí' : 'no';
