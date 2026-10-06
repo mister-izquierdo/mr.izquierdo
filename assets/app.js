@@ -116,7 +116,7 @@
   const VU = (CFG.VIDEO_URL || '').trim();
   const yt = VU.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
   const vm = VU.match(/vimeo\.com\/(\d+)/);
-  const embedSrc = yt ? 'https://www.youtube-nocookie.com/embed/' + yt[1] + '?autoplay=1&rel=0&playsinline=1'
+const embedSrc = yt ? 'https://www.youtube-nocookie.com/embed/' + yt[1] + '?rel=0&playsinline=1'
                  : vm ? 'https://player.vimeo.com/video/' + vm[1] + '?autoplay=1' : '';
   function videoFail() { videoFailed = true; queueGuide(); }
   if (embedSrc) { vid.remove(); player.classList.add('embed'); }
