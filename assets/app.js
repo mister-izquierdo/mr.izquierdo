@@ -282,6 +282,7 @@
     const timeout = setTimeout(() => ctrl.abort(), 20000);
     try {
       track('audit_submit_attempt');
+      console.log('FORMULARIO: LLEGA AL FETCH');
       await fetch(url, {
         method: 'POST', mode: 'no-cors', signal: ctrl.signal,
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
