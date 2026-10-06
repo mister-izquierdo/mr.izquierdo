@@ -254,48 +254,114 @@
     }
   });
 
-  function showFormError(msg) { formErr.textContent = msg; formErr.hidden = false; }
-  function setBusy(b) { submitBtn.disabled = b; submitBtn.textContent = b ? 'Enviando…' : 'Solicitar mi auditoría'; }
+function showFormError(msg) {
+  formErr.textContent = msg;
+  formErr.hidden = false;
+}
 
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (stepIdx < steps.length - 1) { nextBtn.click(); return; }
-    for (let i = 0; i < steps.length; i++) {
-      if (!validateStep(i)) { if (i !== stepIdx) showStep(i, false); return; }
-    }
-    const data = Object.fromEntries(new FormData(form).entries());
-    const isBot = !!data.empresa_web; 
-    console.log('FORMULARIO: SUBMIT RECIBIDO', data);// campo trampa: un humano no lo ve
-    delete data.empresa_web;
-    data.consentimiento = 'sí';
-    data.newsletter = form.elements.newsletter.checked ? 'sí' : 'no';
-    data.token = S.token; data.action = 'complete';
-    lastLead = { nombre: data.nombre, email: data.email };
-    if (isBot) { sent(); return; }
+function setBusy(b) {
+  submitBtn.disabled = b;
+  submitBtn.textContent = b ? 'Enviando…' : 'Solicitar mi auditoría';
+}
 
-    const url = CFG.APPS_SCRIPT_URL;
-    if (!url || /YOUR_/i.test(url)) {
-      showFormError('La conexión con Google todavía no está configurada. No se ha enviado ni guardado la solicitud.');
+async function sendForm() {
+  if (stepIdx < steps.length - 1) {
+    nextBtn.click();
+    return;
+  }
+
+  for (let i = 0; i < steps.length; i++) {
+    if (!validateStep(i)) {
+      if (i !== stepIdx) showStep(i, false);
       return;
     }
-    setBusy(true); formErr.hidden = true;
-    const ctrl = new AbortController();
-    const timeout = setTimeout(() => ctrl.abort(), 20000);
-    try {
-      track('audit_submit_attempt');
-      console.log('FORMULARIO: LLEGA AL FETCH');
-      await fetch(url, {
-        method: 'POST', mode: 'no-cors', signal: ctrl.signal,
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(Object.assign({}, data, { pagina: location.href, enviado: new Date().toISOString() }))
-      });
-      track('audit_submit_success');
-      sent();
-    } catch (err) {
-      showFormError('No hemos podido enviar tu solicitud. Comprueba tu conexión e inténtalo de nuevo.');
-    } finally { clearTimeout(timeout); setBusy(false); }
-  });
+  }
 
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  console.log('FORMULARIO: SUBMIT RECIBIDO', data);
+
+  const isBot = !!data.empresa_web;
+  delete data.empresa_web;
+
+  data.consentimiento = 'sí';
+  data.newsletter = form.elements.newsletter.checked ? 'sí' : 'no';
+  data.token = S.token;
+  data.action = 'complete';
+
+  lastLead = {
+    nombre: data.nombre,
+    email: data.email
+  };
+
+  if (isBot) {
+    sent();
+    return;
+  }
+
+  const url = CFG.APPS_SCRIPT_URL;
+
+  if (!url || /YOUR_/i.test(url)) {
+    showFormError(
+      'La conexión con Google todavía no está configurada. No se ha enviado ni guardado la solicitud.'
+    );
+    return;
+  }
+
+  setBusy(true);
+  formErr.hidden = true;
+
+  const ctrl = new AbortController();
+  const timeout = setTimeout(() => ctrl.abort(), 20000);
+
+  try {
+    track('audit_submit_attempt');
+
+    console.log('FORMULARIO: LLEGA AL FETCH');
+
+    await fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      signal: ctrl.signal,
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(
+        Object.assign({}, data, {
+          pagina: location.href,
+          enviado: new Date().toISOString()
+        })
+      )
+    });
+
+    track('audit_submit_success');
+
+    console.log('FORMULARIO: FETCH COMPLETADO');
+
+    sent();
+
+  } catch (err) {
+    console.error('FORMULARIO: ERROR', err);
+
+    showFormError(
+      'No hemos podido enviar tu solicitud. Comprueba tu conexión e inténtalo de nuevo.'
+    );
+
+  } finally {
+    clearTimeout(timeout);
+    setBusy(false);
+  }
+}
+
+submitBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  sendForm();
+});
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  sendForm();
+});
   function sent() {
     S.formSent = true;
     S.auditUnlocked = true;
