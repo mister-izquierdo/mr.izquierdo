@@ -461,7 +461,7 @@ body::before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none
 /* ═══ V16 ═══════════════════════════════════════════════════════════
    Carpetas = pestañas de ventana (Chrome) en un solo color plano, sin borde.
    Botones y tipografía siguiendo apple.com. */
-:root{--panel:#2a2a2d;--tabdark:#161618;--blue:#0071e3;--blue-h:#0077ed;--link:#2997ff;--ink:#1d1d1f;
+:root{--panel:#2a2a2d;--tabdark:#161618;--blue:##ff0000;--blue-h:##ff0003;--link:#2997ff;--ink:#1d1d1f;
   --muted:#a1a1a6;--faint:#86868b;--font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,"Segoe UI",Roboto,Arial,sans-serif}
 
 /* Tipografía (SF Pro: pesos 400/600, seguimiento negativo, frase normal, #f5f5f7 y #a1a1a6) */
