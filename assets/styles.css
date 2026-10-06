@@ -45,7 +45,7 @@ h1,h2,h3,p,ol,dl,dd{margin:0}
 .btn:hover{filter:brightness(1.08)}
 .btn:active{transform:scale(.97)}
 .btn[disabled]{opacity:.5;cursor:progress}
-.btn-primary{background:#fff;color:#111}
+.btn-primary{background:#ff0000;color:#fff}
 .btn-glass{background:rgba(255,255,255,.12);color:var(--text);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
 .btn-glass:hover{background:rgba(255,255,255,.18);filter:none}
 .btn-text{background:none;color:var(--muted);padding-inline:6px}
