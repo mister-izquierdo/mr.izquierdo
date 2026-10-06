@@ -767,11 +767,56 @@ h1,h2,h3,.faq summary,.q h3,.deliver dt{font-family:-apple-system,BlinkMacSystem
 @media(max-width:700px){.archive .tab .n{font-size:13px}.archive-section-title{font-size:clamp(27px,8vw,42px);margin-bottom:28px}}
 
 /* BOTONES ROJOS */
+/* BOTONES · RED LIQUID GLASS */
 .btn-primary{
-  background:#ff0000 !important;
+  position:relative;
+  overflow:hidden;
+
+  background:rgba(255,0,0,.72) !important;
   color:#fff !important;
-  border-color:#ff0000 !important;
-  box-shadow:none !important;
+
+  border:1px solid rgba(255,255,255,.38) !important;
+  border-top-color:rgba(255,255,255,.55) !important;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.38),
+    inset 0 -1px 2px rgba(120,0,0,.25),
+    0 6px 18px rgba(255,0,0,.18) !important;
+
+  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  backdrop-filter:blur(18px) saturate(180%);
+
+  text-shadow:0 1px 2px rgba(0,0,0,.18);
+}
+
+.btn-primary::before{
+  content:"";
+  position:absolute;
+  inset:1px 1px 52% 1px;
+
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,.32),
+    rgba(255,255,255,0)
+  );
+
+  border-radius:inherit;
+  pointer-events:none;
+}
+
+.btn-primary:hover{
+  background:rgba(255,0,0,.82) !important;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.45),
+    inset 0 -1px 2px rgba(120,0,0,.28),
+    0 8px 24px rgba(255,0,0,.25) !important;
+
+  transform:translateY(-1px);
+}
+
+.btn-primary:active{
+  transform:translateY(0);
 }
 
 .btn-primary:hover,
