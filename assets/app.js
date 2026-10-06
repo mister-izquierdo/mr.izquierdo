@@ -119,10 +119,25 @@
 const embedSrc = yt ? 'https://www.youtube-nocookie.com/embed/' + yt[1] + '?rel=0&playsinline=1'
                  : vm ? 'https://player.vimeo.com/video/' + vm[1] + '?autoplay=1' : '';
   function videoFail() { videoFailed = true; queueGuide(); }
-  if (embedSrc) { vid.remove(); player.classList.add('embed'); }
-  else if (!VU) videoFail();
-  else { vid.querySelector('source').setAttribute('src', VU); vid.load(); vid.querySelector('source').addEventListener('error', videoFail); vid.addEventListener('error', videoFail); }
+  if (embedSrc) {
+  vid.remove();
+  player.classList.add('embed');
 
+  const f = document.createElement('iframe');
+  f.src = embedSrc;
+  f.title = 'Presentación de la auditoría';
+  f.allow = 'autoplay; fullscreen; picture-in-picture';
+  f.allowFullscreen = true;
+  f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2';
+  player.append(f);
+}
+else if (!VU) videoFail();
+else {
+  vid.querySelector('source').setAttribute('src', VU);
+  vid.load();
+  vid.querySelector('source').addEventListener('error', videoFail);
+  vid.addEventListener('error', videoFail);
+}
   const fmt = t => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
   function wake() {
     player.classList.remove('idle'); clearTimeout(idleT);
@@ -135,12 +150,6 @@ const embedSrc = yt ? 'https://www.youtube-nocookie.com/embed/' + yt[1] + '?rel=
   playBtn.addEventListener('click', () => {
     if (videoFailed) { soon.hidden = false; return; }
     player.classList.add('started');
-    if (embedSrc) {
-      const f = document.createElement('iframe');
-      f.src = embedSrc; f.title = 'Presentación de la auditoría'; f.allow = 'autoplay; fullscreen; picture-in-picture'; f.allowFullscreen = true;
-      f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2';
-      player.append(f);
-    } else {
       controls.hidden = false;
       const p = vid.play(); if (p && p.catch) p.catch(() => {});
     }
