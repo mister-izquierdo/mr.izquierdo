@@ -109,15 +109,43 @@
   });
 
   /* 3 · VÍDEO (reproductor propio, entre el hero y las carpetas) ── */
-  const player = $('#player'), vid = $('#vid'), playBtn = $('#play'), soon = $('#soon'), controls = $('#controls');
-  const seek = $('#seek'), timeEl = $('#time'), cPlay = $('#cPlay'), cMute = $('#cMute'), cFull = $('#cFull');
-  let videoFailed = false, idleT;
+const player = $('#player'), vid = $('#vid'), playBtn = $('#play'), soon = $('#soon'), controls = $('#controls');
+const seek = $('#seek'), timeEl = $('#time'), cPlay = $('#cPlay'), cMute = $('#cMute'), cFull = $('#cFull');
+let videoFailed = false, idleT;
 
-  const VU = (CFG.VIDEO_URL || '').trim();
-  const yt = VU.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
-  const vm = VU.match(/vimeo\.com\/(\d+)/);
-const embedSrc = yt ? 'https://www.youtube-nocookie.com/embed/' + yt[1] + '?rel=0&playsinline=1'
-                 : vm ? 'https://player.vimeo.com/video/' + vm[1] + '?autoplay=1' : '';
+const VU = (CFG.VIDEO_URL || '').trim();
+const yt = VU.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+const vm = VU.match(/vimeo\.com\/(\d+)/);
+
+const embedSrc = yt
+  ? 'https://www.youtube-nocookie.com/embed/' + yt[1] + '?rel=0&playsinline=1'
+  : vm
+    ? 'https://player.vimeo.com/video/' + vm[1]
+    : '';
+
+if (embedSrc) {
+  vid.remove();
+  playBtn.remove();
+  player.classList.add('embed');
+
+  const f = document.createElement('iframe');
+  f.src = embedSrc;
+  f.title = 'Presentación de la auditoría';
+  f.allow = 'autoplay; fullscreen; picture-in-picture';
+  f.allowFullscreen = true;
+  f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2';
+
+  player.append(f);
+}
+else if (!VU) {
+  videoFail();
+}
+else {
+  vid.querySelector('source').setAttribute('src', VU);
+  vid.load();
+  vid.querySelector('source').addEventListener('error', videoFail);
+  vid.addEventListener('error', videoFail);
+}
   function videoFail() { videoFailed = true; queueGuide(); }
   if (embedSrc) {
   vid.remove();
