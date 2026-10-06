@@ -11,7 +11,7 @@ window.MR_CONFIG = {
   //    'presentation.mp4'                       → archivo junto a index.html
   //    'https://youtu.be/XXXXXXXXXXX'           → YouTube (se carga sin cookies hasta que das al play)
   //    'https://vimeo.com/123456789'            → Vimeo
-  VIDEO_URL: 'presentation.mp4',
+  VIDEO_URL: 'https://www.youtube.com/watch?v=yQT2fRn2bJU',
 
   // 4) Analítica (opcional). ID de Google Analytics 4, tipo 'G-XXXXXXXXXX'. Vacío = la web no usa analítica
   //    y el panel de cookies solo informa. Con ID, solo se carga si el visitante acepta.
