@@ -175,14 +175,19 @@ else {
     if (!S.videoStarted) { S.videoStarted = true; persist(); }
     queueGuide();
   }
+if (!embedSrc) {
   playBtn.addEventListener('click', () => {
     if (videoFailed) { soon.hidden = false; return; }
+
     player.classList.add('started');
-      controls.hidden = false;
-      const p = vid.play(); if (p && p.catch) p.catch(() => {});
-    }
+    controls.hidden = false;
+
+    const p = vid.play();
+    if (p && p.catch) p.catch(() => {});
+
     videoStarted();
   });
+}
   if (!embedSrc) {
     vid.addEventListener('play', () => { player.classList.remove('paused'); wake(); videoStarted(); });
     vid.addEventListener('pause', () => { player.classList.add('paused'); wake(); });
