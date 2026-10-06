@@ -277,9 +277,11 @@ async function sendForm() {
     }
   }
 
-  const data = Object.fromEntries(new FormData(form).entries());
+const data = Object.fromEntries(new FormData(form).entries());
 
-  console.log('FORMULARIO: SUBMIT RECIBIDO', data);
+console.log('FORMULARIO: SUBMIT RECIBIDO', data);
+console.log('EMPRESA WEB REAL:', JSON.stringify(data.empresa_web));
+console.log('NEGOCIO REAL:', JSON.stringify(data.negocio));
 
   const isBot = !!data.empresa_web;
    console.log('CAMPO BOT:', data.empresa_web);
