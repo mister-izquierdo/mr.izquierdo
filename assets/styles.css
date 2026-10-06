@@ -765,3 +765,18 @@ h1,h2,h3,.faq summary,.q h3,.deliver dt{font-family:-apple-system,BlinkMacSystem
 .archive-section-title{margin:0 0 clamp(28px,3vw,44px);display:flex;align-items:baseline;gap:.45em;font-size:clamp(30px,4.4vw,58px);line-height:.98;letter-spacing:-.045em;font-weight:750;color:#f5f5f7}
 .archive-section-title span{font-weight:650}
 @media(max-width:700px){.archive .tab .n{font-size:13px}.archive-section-title{font-size:clamp(27px,8vw,42px);margin-bottom:28px}}
+
+/* BOTONES ROJOS */
+.btn-primary{
+  background:#ff0000 !important;
+  color:#fff !important;
+  border-color:#ff0000 !important;
+  box-shadow:none !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus{
+  background:#ff0000 !important;
+  color:#fff !important;
+  border-color:#ff0000 !important;
+}
