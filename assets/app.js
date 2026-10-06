@@ -301,10 +301,6 @@ delete data.empresa_web;
     email: data.email
   };
 
-  if (isBot) {
-    sent();
-    return;
-  }
 
   const url = CFG.APPS_SCRIPT_URL;
 
