@@ -283,9 +283,12 @@ console.log('FORMULARIO: SUBMIT RECIBIDO', data);
 console.log('EMPRESA WEB REAL:', JSON.stringify(data.empresa_web));
 console.log('NEGOCIO REAL:', JSON.stringify(data.negocio));
 
-  const isBot = !!data.empresa_web;
-   console.log('CAMPO BOT:', data.empresa_web);
-  delete data.empresa_web;
+const botField = form.querySelector('[name="empresa_web"]');
+const isBot = !!(botField && botField.value.trim());
+
+console.log('CAMPO BOT REAL:', botField ? JSON.stringify(botField.value) : 'NO EXISTE');
+
+delete data.empresa_web;
 
   data.consentimiento = 'sí';
   data.newsletter = form.elements.newsletter.checked ? 'sí' : 'no';
