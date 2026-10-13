@@ -841,3 +841,142 @@ h1,h2,h3,.faq summary,.q h3,.deliver dt{font-family:-apple-system,BlinkMacSystem
   object-fit: contain;
   vertical-align: -0.12em;
 }
+
+
+/* ==========================================
+   MR_IZQUIERDO · SIMPLIFICACIÓN DE LA LANDING
+   ========================================== */
+
+/* Sin cabecera */
+.site-header {
+  display: none !important;
+}
+
+/* Firma del hero */
+.signature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin: 0 auto clamp(36px, 5vw, 58px);
+  text-align: center;
+}
+
+.signature-img {
+  display: block;
+  width:  min(220px, 58vw);
+  height: 64px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.creds {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: .01em;
+}
+
+/* Texto introductorio */
+.hero .hook {
+  max-width: 760px;
+  margin: 22px auto 0;
+}
+
+.hero .small {
+  max-width: 620px;
+  margin: 20px auto 0;
+}
+
+/* Formulario: ancho limitado en ordenador */
+.form-section {
+  width: 100%;
+  padding: 0 24px clamp(64px, 8vw, 100px);
+}
+
+.form-card {
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto;
+  min-width: 0;
+}
+
+/* Que todos los elementos respeten el ancho de la tarjeta */
+.form-card *,
+.form-card *::before,
+.form-card *::after {
+  box-sizing: border-box;
+}
+
+.form-card input:not([type="checkbox"]),
+.form-card select,
+.form-card textarea,
+.form-card .select,
+.form-card .select-btn {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.form-card .input {
+  width: 100%;
+}
+
+.form-card .field {
+  min-width: 0;
+}
+
+/* Footer */
+.site-footer .footer-signature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+}
+
+.footer-signature img {
+  display: block;
+  width: min(220px, 58vw);
+  height: 64px;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Móvil: más espacio lateral y campos sin desbordamiento */
+@media (max-width: 700px) {
+  .form-section {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .form-card {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .form-card .form-head,
+  .form-card #formWrap,
+  .form-card .done {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .form-card .nav {
+    gap: 10px;
+  }
+
+  .form-card .nav button {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .signature {
+    gap: 18px;
+  }
+
+  .signature-img,
+  .footer-signature img {
+    width: min(200px, 62vw);
+  }
+}
