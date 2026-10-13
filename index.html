@@ -152,9 +152,31 @@
 
           <div class="step" data-title="Tu marca">
             <div class="field"><label for="f-tipo">Tipo de negocio</label>
-              <select class="js-select" id="f-tipo" name="tipo" data-placeholder="Selecciona una opción">
-                <option value="">Selecciona una opción</option><option>Restaurante</option><option>Cafetería</option><option>Bar</option><option>Heladería</option><option>Hotel</option><option>Marca gastronómica</option><option>Aún no tengo local (voy a abrir)</option><option>Otro</option>
-              </select></div>
+              
+<select class="js-select" id="f-tipo" name="tipo" data-placeholder="Selecciona una opción">
+  <option value="">Selecciona una opción</option>
+  <option value="Restaurante">Restaurante</option>
+  <option value="Cafetería">Cafetería</option>
+  <option value="Bar">Bar</option>
+  <option value="Heladería">Heladería</option>
+  <option value="Hotel">Hotel</option>
+  <option value="Marca gastronómica">Marca gastronómica</option>
+  <option value="Aún no tengo local (voy a abrir)">Aún no tengo local (voy a abrir)</option>
+  <option value="Otro">Otro</option>
+</select>
+
+<div class="field" id="tipoOtroWrap" hidden>
+  <label for="f-tipo-otro">¿Qué tipo de negocio tienes?</label>
+  <input
+    class="input"
+    id="f-tipo-otro"
+    name="tipo_otro"
+    type="text"
+    placeholder="Escribe el tipo de negocio"
+    autocomplete="organization"
+  >
+</div>
+
             <div class="field"><label for="f-web">Instagram o web</label><input class="input" id="f-web" name="web" type="text" autocapitalize="none" placeholder="@tu_negocio o tuweb.com"></div>
             <div class="field"><label for="f-inversion">Inversión prevista</label>
               <select class="js-select" id="f-inversion" name="inversion" data-placeholder="Selecciona una opción">
