@@ -252,5 +252,27 @@
 
 <script src="assets/config.js"></script>
 <script src="assets/app.js"></script>
+  
+(() => {
+  const tipo = document.getElementById('f-tipo');
+  const otroWrap = document.getElementById('tipoOtroWrap');
+  const otroInput = document.getElementById('f-tipo-otro');
+
+  if (!tipo || !otroWrap || !otroInput) return;
+
+  function actualizarTipoOtro() {
+    const mostrar = tipo.value === 'Otro';
+    otroWrap.hidden = !mostrar;
+    otroInput.required = mostrar;
+
+    if (!mostrar) {
+      otroInput.value = '';
+    }
+  }
+
+  tipo.addEventListener('change', actualizarTipoOtro);
+  actualizarTipoOtro();
+})();
+
 </body>
 </html>
