@@ -222,18 +222,43 @@ if (!embedSrc) {
   let stepIdx = 0, lastLead = null;
   const touched = new Set();
 
-  function showStep(i, focus) {
-    stepIdx = i;
-    steps.forEach((s, k) => s.classList.toggle('is-active', k === i));
-    bars.forEach((b, k) => b.classList.toggle('on', k <= i));
-    stepLabel.innerHTML = 'Paso ' + (i + 1) + ' de ' + steps.length + ' · <b>' + steps[i].dataset.title + '</b>';
-    backBtn.hidden = i === 0;
-    nextBtn.hidden = i === steps.length - 1;
-    submitBtn.hidden = i !== steps.length - 1;
-    formErr.hidden = true;
-    if (focus && finePointer) { const f = $('.input, .select-btn', steps[i]); if (f) f.focus({ preventScroll: true }); }
-    queueGuide(); setTimeout(queueGuide, 450);
+
+function showStep(i, focus) {
+  if (!steps.length || i < 0 || i >= steps.length) return;
+
+  stepIdx = i;
+
+  steps.forEach((s, k) => {
+    s.classList.toggle('is-active', k === i);
+    s.hidden = k !== i;
+  });
+
+  bars.forEach((b, k) => b.classList.toggle('on', k <= i));
+
+  stepLabel.innerHTML =
+    'Paso ' + (i + 1) + ' de ' + steps.length +
+    ' · <b>' + steps[i].dataset.title + '</b>';
+
+  backBtn.hidden = i === 0;
+  nextBtn.hidden = i === steps.length - 1;
+  submitBtn.hidden = i !== steps.length - 1;
+
+  /* Asegura que los botones tengan un estado visual coherente */
+  nextBtn.style.removeProperty('display');
+  backBtn.style.removeProperty('display');
+  submitBtn.style.removeProperty('display');
+
+  formErr.hidden = true;
+
+  if (focus && finePointer) {
+    const f = $('.input, .select-btn', steps[i]);
+    if (f) f.focus({ preventScroll: true });
   }
+
+  queueGuide();
+  setTimeout(queueGuide, 450);
+}
+
 
   function fieldOk(el) {
     if (!el.required) return true;
